@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
+<suite name="ListAssertionSuite">
+    <test name="Lists Test">
+        <classes>
+            <class name="com.testng.task.ListAssertion">
+                <parameter name="path1" value="src/main/resources/list1.json"></parameter>
+                <parameter name="path2" value="src/main/resources/list2.json"></parameter>
+            </class>
+        </classes>
+    </test>
+</suite>

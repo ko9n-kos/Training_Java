@@ -1,0 +1,25 @@
+<!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
+<suite name="SecondSuite">
+    <test name="testing2">
+        <classes>
+            <class name="com.testng.task.TestCase3">
+                <parameter name="string1" value="Test string"></parameter>
+                <parameter name="string2" value="Test string"></parameter>
+                <parameter name="a" value="123"></parameter>
+                <parameter name="b" value="123"></parameter>
+                <parameter name="c" value="121"></parameter>
+                <parameter name="Is human can fly?" value="False"></parameter>
+                <parameter name="emptyString" value="Test"></parameter>
+                <parameter name="wtf" value="True"></parameter>
+            </class>
+            <class name="com.testng.task.TestCase4">
+                <parameter name="sentence1" value="This is a test"></parameter>
+                <parameter name="sentence2" value="This is a test"></parameter>
+                <parameter name="sentence3" value="Test test test"></parameter>
+                <parameter name="a" value="2"></parameter>
+                <parameter name="b" value="3"></parameter>
+                <parameter name="c" value="11"></parameter>
+            </class>
+        </classes>
+    </test>
+</suite>
