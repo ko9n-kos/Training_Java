@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
+<suite name="GmailSuite">
+    <test name="Gmail Test">
+        <classes>
+            <class name="com.gmail.MailTest">
+                <parameter name="login" value="squirrel1989@mail.ru"></parameter>
+                <parameter name="password" value="Calipso"></parameter>
+                <parameter name="expectedCountOfLetters" value="1800"></parameter>
+            </class>
+        </classes>
+    </test>
+</suite>
