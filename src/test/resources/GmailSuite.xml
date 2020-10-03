@@ -3,9 +3,7 @@
     <test name="Gmail Test">
         <classes>
             <class name="com.gmail.MailTest">
-                <parameter name="login" value="squirrel1989@mail.ru"></parameter>
-                <parameter name="password" value="Calipso"></parameter>
-                <parameter name="expectedCountOfLetters" value="1800"></parameter>
+                <parameter name="expectedCountOfLetters" value="2000"></parameter>
             </class>
         </classes>
     </test>

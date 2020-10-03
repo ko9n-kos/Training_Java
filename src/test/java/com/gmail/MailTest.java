@@ -1,56 +1,53 @@
 package com.gmail;
 
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.util.List;
+
+import static com.codeborne.selenide.Selenide.$;
 
 public class MailTest {
 
-    @Test
-    @Parameters({"login", "password"})
-    public void testLogin(String login, String password){
-        LoginPage loginPage = new LoginPage();
-        loginPage.logInGmail(login,password);
-        loginPage.areYouLoggedIn();
+    LoginPage loginPage;
+    GmailBoxPage inbox = new GmailBoxPage();
+
+
+    public MailTest() throws IOException {
+        TestData data = DataInitialization.initialization();
+        loginPage = new LoginPage(data);
     }
 
 
     @Test
-    @Parameters({"expectedCountOfLetters", "login", "password"})
-    public void testCountOfLetters(int expectedCountOfLetters, String login, String password){
-        LoginPage loginPage = new LoginPage();
-        loginPage.logInGmail(login,password);
-        GmailBoxPage inbox = new GmailBoxPage();
-        Assert.assertNotEquals(expectedCountOfLetters,inbox.countOfLetters());
+    public void testLogin() throws IOException {
+        loginPage.logInGmail();
+        Assert.assertTrue(loginPage.areYouLoggedIn());
+    }
 
+    @Test
+    @Parameters({"expectedCountOfLetters"})
+    public void testCountOfLetters(Long expectedCountOfLetters) throws IOException {
+        loginPage.logInGmail();
+        Assert.assertNotEquals(expectedCountOfLetters, inbox.countOfLetters());
     }
 
 
     @Test(dataProvider = "emailsProvider", dataProviderClass = GmailDP.class)
-    @Parameters({"login", "password"})
-    public void sendMultipleEmails(String email, String login, String password){
-//        System.out.println(email);
-        LoginPage loginPage = new LoginPage();
-        loginPage.logInGmail(login,password);
-        GmailBoxPage gmailBoxPage = new GmailBoxPage();
-        gmailBoxPage.sendEmails(email);
-        //gmailBoxPage.checkThatEmailSent();
+    public void sendMultipleEmails(String email) {
+        loginPage.logInGmail();
+        inbox.sendEmails(email);
+        Assert.assertTrue(inbox.checkThatEmailSent());
     }
 
 
     @AfterMethod
     public void endOfTest(){
-        GmailBoxPage out = new GmailBoxPage();
-        out.logOut();
+        inbox.logOut();
     }
-
-
-
-
-
-
 
 }

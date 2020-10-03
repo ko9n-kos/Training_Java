@@ -2,30 +2,39 @@ package com.gmail;
 
 import com.codeborne.selenide.Selenide;
 
+import java.io.IOException;
+
 import static com.codeborne.selenide.WebDriverRunner.*;
 
 import static com.codeborne.selenide.Selenide.$;
 
 public class LoginPage {
 
+    private final String URL = "https://mail.ru";
+    private final String loginIntup = "[name='login']";
+    private final String submit = "input.o-control";
+    private final String passwordInput = "[name='password']";
+    private TestData data;
 
-    private final String e_mailAddress = "login";
-    private final String password = "password";
+    public LoginPage(TestData data){
+        this.data = data;
+    }
 
 
-    public void logInGmail (String e_mailAddress, String password){
-        Selenide.open("https://mail.ru");
-        $("[name='login']").setValue(e_mailAddress);
-        $("input.o-control").click();
-        $("[name='password']").setValue(password);
-        $("input.o-control").click();
+    public void logInGmail () {
+        Selenide.open(URL);
+        $(loginIntup).setValue(data.emailAddress);
+        $(submit).click();
+        $(passwordInput).setValue(data.password);
+        $(submit).click();
 
     }
 
-    public void areYouLoggedIn() {
-        if (url().contains("inbox")) {
+    public boolean areYouLoggedIn() {
+        if (!url().contains(URL)) {
             throw new IllegalStateException("Something went wrong");
         }
+        return true;
     }
 
 
