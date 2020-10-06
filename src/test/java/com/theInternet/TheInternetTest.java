@@ -22,7 +22,7 @@ public class TheInternetTest {
     public SelenideElement uploadConfirmation = $("#uploaded-files");
     public SelenideElement additionalInfo = $("div.example > div:nth-of-type(1) h5");
     public SelenideElement viewProfileLink = $("a[href='/users/1']");
-    public SelenideElement profilePage = $("a[href='/users/1']");
+    public String filePath = "C:\\Users\\KonstantinSTATUTA\\Desktop\\File_X.rtf";
 
 
 
@@ -60,7 +60,7 @@ public class TheInternetTest {
     @Test
     public void uploadTest(){
         openUrl(urls.fileUploadPage);
-        chooseFileButton.setValue("C:\\Users\\KonstantinSTATUTA\\Desktop\\File_X.rtf");
+        chooseFileButton.setValue(filePath);
         uploadButton.click();
         Assert.assertTrue(uploadConfirmation.exists());
     }
