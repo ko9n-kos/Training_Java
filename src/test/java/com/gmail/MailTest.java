@@ -3,6 +3,7 @@ package com.gmail;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -22,24 +23,26 @@ public class MailTest {
         loginPage = new LoginPage(data);
     }
 
+    @BeforeMethod
+    public void logIn(){
+        loginPage.logInGmail();
+    }
+
 
     @Test
     public void testLogin() throws IOException {
-        loginPage.logInGmail();
         Assert.assertTrue(loginPage.areYouLoggedIn());
     }
 
     @Test
     @Parameters({"expectedCountOfLetters"})
     public void testCountOfLetters(Long expectedCountOfLetters) throws IOException {
-        loginPage.logInGmail();
         Assert.assertNotEquals(expectedCountOfLetters, inbox.countOfLetters());
     }
 
 
     @Test(dataProvider = "emailsProvider", dataProviderClass = GmailDP.class)
     public void sendMultipleEmails(String email) {
-        loginPage.logInGmail();
         inbox.sendEmails(email);
         Assert.assertTrue(inbox.checkThatEmailSent());
     }

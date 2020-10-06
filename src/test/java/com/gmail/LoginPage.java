@@ -1,6 +1,7 @@
 package com.gmail;
 
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
 
 import java.io.IOException;
 
@@ -11,9 +12,9 @@ import static com.codeborne.selenide.Selenide.$;
 public class LoginPage {
 
     private final String URL = "https://mail.ru";
-    private final String loginIntup = "[name='login']";
-    private final String submit = "input.o-control";
-    private final String passwordInput = "[name='password']";
+    private final SelenideElement loginInput = $("[name='login']");
+    private final SelenideElement submit = $("input.o-control");
+    private final SelenideElement passwordInput = $("[name='password']");
     private TestData data;
 
     public LoginPage(TestData data){
@@ -23,10 +24,10 @@ public class LoginPage {
 
     public void logInGmail () {
         Selenide.open(URL);
-        $(loginIntup).setValue(data.emailAddress);
-        $(submit).click();
-        $(passwordInput).setValue(data.password);
-        $(submit).click();
+        loginInput.setValue(data.emailAddress);
+        submit.click();
+        passwordInput.setValue(data.password);
+        submit.click();
 
     }
 
